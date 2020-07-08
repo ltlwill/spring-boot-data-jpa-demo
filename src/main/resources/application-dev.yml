@@ -1,0 +1,4 @@
+app:
+  startIndex: 0
+  imageSrcDir: D:\test\10000images
+  urlPrefix: http://localhost:8080

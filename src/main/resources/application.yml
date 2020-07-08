@@ -1,0 +1,47 @@
+# 服务器配置
+server:
+  port: 9880
+  compression:
+    enabled: true
+
+# eureka客户端（即服务提供者）,集群
+spring:
+  config:    location:  
+  application:
+    name: img-recover-service
+  profiles:
+    active: dev
+  datasource:
+    # Loading class `com.mysql.jdbc.Driver'. This is deprecated. The new driver class is `com.mysql.cj.jdbc.Driver'.
+    #driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@x.y.z.w:1521:orcl
+    username: u
+    password: p
+    
+  # Spring data JPA配置
+  jpa:
+    hibernate:
+      naming:
+        # 解决列名都配置正确，但是还是出现SQL Error: 1054, SQLState: 42S22 Unknown column in 'field list' error的问题
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl 
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: none
+        #dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        dialect: org.hibernate.dialect.Oracle10gDialect
+    #database: 
+    show-sql: true     
+# 日志
+logging: 
+  file:    path: 
+  config: classpath:log-config/logback-${spring.profiles.active}.xml
+  
+app:
+  startIndex: 0
+  imageSrcDir: D:\chrome_downloads
+  urlPrefix: http://localhost:8777    
+    
+  
+
